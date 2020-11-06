@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jobscheduling-service
+  namespace: manufdemo
+spec:
+  ports:
+  - port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    name: jobscheduling-deploy
+  sessionAffinity: None
+  type: ClusterIP

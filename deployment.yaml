@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: jobscheduling-deploy
+    app: jobscheduling
+  name: jobscheduling-deploy
+  namespace: manufdemo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: jobscheduling-deploy
+  template:
+    metadata:
+      labels:
+        name: jobscheduling-deploy
+    spec:
+      containers:
+      - image: docker.io/cllebrun/manufdemo:2.0
+        imagePullPolicy: Always
+        name: appmanuf
+        ports:
+        - containerPort: 3000
+        env:
+        - name: WML_URL
+          valueFrom:
+            configMapKeyRef:
+              name: jobscheduling-config
+              key: WML_URL
+        - name: IBM_CLOUD_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: wml-secret
+              key: IBM_CLOUD_API_KEY
+        - name: WML_SPACE_ID
+          valueFrom:
+            secretKeyRef:
+              name: wml-secret
+              key: WML_SPACE_ID
+        - name: WML_VERSION_DATE
+          valueFrom:
+            configMapKeyRef:
+              name: jobscheduling-config
+              key: WML_VERSION_DATE
+        - name: WML_DEPLOYMENT_ID_IN_SPACE
+          valueFrom:
+            secretKeyRef:
+              name: wml-secret
+              key: WML_DEPLOYMENT_ID_IN_SPACE
+        - name: ISOPTIMIZED
+          valueFrom:
+            configMapKeyRef:
+              name: jobscheduling-config
+              key: ISOPTIMIZED
+        - name: DEPLOYMENT_LOCATION
+          valueFrom:
+            configMapKeyRef:
+              name: jobscheduling-config
+              key: DEPLOYMENT_LOCATION
+        - name: MY_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
