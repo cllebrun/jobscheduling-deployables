@@ -5,7 +5,6 @@ metadata:
     name: jobscheduling-deploy
     app: jobscheduling
   name: jobscheduling-deploy
-  namespace: manufdemo
 spec:
   replicas: 1
   selector:
