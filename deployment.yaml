@@ -54,7 +54,7 @@ spec:
         - name: DEPLOYMENT_LOCATION
           valueFrom:
             configMapKeyRef:
-              name: jobscheduling-config
+              name: jobscheduling-config-specific
               key: DEPLOYMENT_LOCATION
         - name: MY_NODE_NAME
           valueFrom:

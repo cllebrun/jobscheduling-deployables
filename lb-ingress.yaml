@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: lb-jobscheduling-ingress
+spec:
+  rules:
+  - host: mcm-js.dev-adv.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: jobscheduling-service
+          servicePort: 3000
