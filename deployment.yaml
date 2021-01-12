@@ -15,7 +15,7 @@ spec:
         name: jobscheduling-deploy
     spec:
       containers:
-      - image: docker.io/cllebrun/manufdemo:2.0
+      - image: docker.io/cllebrun/manufdemo:1.0
         imagePullPolicy: Always
         name: appmanuf
         ports:
